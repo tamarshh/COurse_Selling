@@ -1,0 +1,49 @@
+<div class="course-preview">
+    <h1><%= course.title %></h1>
+    
+    <div class="course-info">
+        <div class="course-image">
+            <img src="<%= course.imageUrl %>" alt="<%= course.title %>">
+        </div>
+        
+        <div class="course-details">
+            <p class="description"><%= course.description %></p>
+            
+            <div class="course-meta">
+                <p><strong>Instructor:</strong> <%= course.instructor %></p>
+                <p><strong>Duration:</strong> <%= course.duration %> hours</p>
+                <p><strong>Level:</strong> <%= course.level %></p>
+                <p><strong>Price:</strong> $<%= course.price %></p>
+            </div>
+            
+            <div class="course-actions">
+                <% if (user) { %>
+                    <form action="/api/courses/purchase" method="POST">
+                        <input type="hidden" name="courseId" value="<%= course._id %>">
+                        <button type="submit" class="btn btn-primary">Purchase Course</button>
+                    </form>
+                <% } else { %>
+                    <p class="login-prompt">
+                        Please <a href="/login">login</a> to purchase this course
+                    </p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+    <div class="course-content">
+        <h2>Course Content</h2>
+        <ul class="content-list">
+            <% course.modules.forEach(module => { %>
+                <li>
+                    <h3><%= module.title %></h3>
+                    <ul>
+                        <% module.lessons.forEach(lesson => { %>
+                            <li><%= lesson.title %></li>
+                        <% }); %>
+                    </ul>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div> 

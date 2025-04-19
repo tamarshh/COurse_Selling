@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Course Platform</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Course Platform</a>
+            <div class="nav-links">
+                <% if (!user) { %>
+                    <a href="/signup">Sign Up</a>
+                    <a href="/login">Login</a>
+                <% } else if (user.role === 'admin') { %>
+                    <a href="/admin/dashboard">Dashboard</a>
+                    <a href="/admin/courses">Courses</a>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/courses">Courses</a>
+                    <a href="/purchases">My Purchases</a>
+                    <a href="/logout">Logout</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <%- body %>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Course Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html> 

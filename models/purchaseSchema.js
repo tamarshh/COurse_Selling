@@ -1,13 +1,12 @@
-const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
+import mongoose from "mongoose";
 
 const purchaseSchema = new mongoose.Schema({
-    _id: ObjectId,
-    userid: ObjectId,
-    courseid: ObjectId
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
+    purchaseDate: { type: Date, default: Date.now },
+    status: { type: String, enum: ['pending', 'completed', 'cancelled'], default: 'completed' }
 });
 
-const purchaseModel = mongoose.model("purchases", purchaseSchema);
-module.exports = {
-    purchaseModel,
-};
+const purchaseModel = mongoose.model("Purchase", purchaseSchema);
+
+export { purchaseModel };

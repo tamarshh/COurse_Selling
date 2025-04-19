@@ -1,0 +1,24 @@
+<div class="purchases">
+    <h1>My Purchased Courses</h1>
+    
+    <% if (purchases.length === 0) { %>
+        <div class="empty-state">
+            <p>You haven't purchased any courses yet.</p>
+            <a href="/courses" class="btn btn-primary">Browse Courses</a>
+        </div>
+    <% } else { %>
+        <div class="purchases-grid">
+            <% purchases.forEach(purchase => { %>
+                <div class="purchase-card">
+                    <img src="<%= purchase.course.imageUrl %>" alt="<%= purchase.course.title %>">
+                    <div class="purchase-details">
+                        <h3><%= purchase.course.title %></h3>
+                        <p class="instructor">By <%= purchase.course.instructor %></p>
+                        <p class="purchase-date">Purchased on: <%= new Date(purchase.purchaseDate).toLocaleDateString() %></p>
+                        <a href="/courses/preview/<%= purchase.course._id %>" class="btn btn-secondary">View Course</a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+</div> 

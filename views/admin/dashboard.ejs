@@ -1,0 +1,39 @@
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+    
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h3>Total Courses</h3>
+            <p class="stat-number"><%= stats.totalCourses %></p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Students</h3>
+            <p class="stat-number"><%= stats.totalStudents %></p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Revenue</h3>
+            <p class="stat-number">$<%= stats.totalRevenue %></p>
+        </div>
+    </div>
+    
+    <div class="recent-activity">
+        <h2>Recent Activity</h2>
+        <div class="activity-list">
+            <% activities.forEach(activity => { %>
+                <div class="activity-item">
+                    <p class="activity-text"><%= activity.description %></p>
+                    <span class="activity-time"><%= new Date(activity.timestamp).toLocaleString() %></span>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+    
+    <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+            <a href="/admin/courses/new" class="btn btn-primary">Create New Course</a>
+            <a href="/admin/courses" class="btn btn-secondary">Manage Courses</a>
+            <a href="/admin/users" class="btn btn-secondary">Manage Users</a>
+        </div>
+    </div>
+</div> 

@@ -1,7 +1,8 @@
-const bcrypt = require("bcrypt");
-const { adminModel } = require("../../models/index.js"); // Adjust the path if needed
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { adminModel } from "../../models/index.js";
 
-const {signup }= async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
 
@@ -9,27 +10,40 @@ const {signup }= async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const existingUser = await userModel.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ message: "User already exists" });
+    const existingAdmin = await adminModel.findOne({ email });
+    if (existingAdmin) {
+      return res.status(409).json({ message: "Admin already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new adminModel({
+    const newAdmin = new adminModel({
       email,
       password: hashedPassword,
       firstName,
       lastName
     });
 
-    await newUser.save();
+    await newAdmin.save();
 
-    res.status(201).json({ message: "admin registered successfully" });
+    const token = jwt.sign(
+      { adminId: newAdmin._id, email: newAdmin.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    res.status(201).json({
+      message: "Admin registered successfully",
+      token,
+      admin: {
+        id: newAdmin._id,
+        email: newAdmin.email,
+        firstName: newAdmin.firstName,
+        lastName: newAdmin.lastName
+      }
+    });
   } catch (error) {
-    console.error("Signup error:", error.message);
+    console.error("Admin signup error:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-module.exports =  {signup} ;

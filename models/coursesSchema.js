@@ -1,15 +1,16 @@
-const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
+import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    price: Number,
-    imageurl: String,
-    creatorId: ObjectId
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true, min: 0 },
+    imageUrl: { type: String },
+    creatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
 });
 
-const coursesModel = mongoose.model( "courses",courseSchema);
-module.exports = 
-   { coursesModel};
+const coursesModel = mongoose.model("Course", courseSchema);
+
+export { coursesModel };
 

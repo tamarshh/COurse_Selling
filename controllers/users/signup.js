@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const { userModel } = require("../../models/index.js"); 
+import bcrypt from "bcrypt";
+import { userModel } from "../../models/index.js";
 
-const {signup }= async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
 
@@ -31,5 +31,3 @@ const {signup }= async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-module.exports =  {signup} ;

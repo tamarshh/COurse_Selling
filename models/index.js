@@ -1,9 +1,9 @@
-const {userModel} = require("./userSchema");
-const {adminModel} = require("./adminSchema");
-const {coursesModel} = require("./coursesSchema");
-const {purchaseModel} = require("./purchaseSchema");
+import { userModel } from "./userSchema.js";
+import { adminModel } from "./adminSchema.js";
+import { coursesModel } from "./coursesSchema.js";
+import { purchaseModel } from "./purchaseSchema.js";
 
-module.exports = {
+export {
     userModel,
     adminModel,
     coursesModel,

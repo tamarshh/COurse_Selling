@@ -1,6 +1,7 @@
 {
-  "name": "course-selling",
+  "name": "course-selling-platform",
   "version": "1.0.0",
+  "description": "Course Selling Platform with integrated frontend",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,13 +10,24 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.2",
-    "nodemon": "^3.1.9"
-  }
+    "mongoose": "^8.1.1",
+    "morgan": "^1.10.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "type": "module"
 }
